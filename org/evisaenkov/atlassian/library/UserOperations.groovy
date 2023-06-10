@@ -1,5 +1,5 @@
-/*
- * Copyright (c) 2022.
+/**
+ * Copyright (c) 2022-2023.
  * @author Evgeniy Isaenkov
  */
 
@@ -16,9 +16,10 @@ import com.atlassian.jira.user.util.UserManager
 import org.evisaenkov.atlassian.library.Variables
 
 /**
- * Class for making users Jira requests
+ * Class for making most commonly user operations Jira requests
  * @author Evgeniy Isaenkov
  */
+
 class UserOperations {
 	
 	private final UserManager userManager = ComponentAccessor.getUserManager()
