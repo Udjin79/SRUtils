@@ -87,17 +87,7 @@ class UserOperations {
 	}
 	
 	Collection<ApplicationUser> getAllActiveUsers() {
-		UserSearchService userSearchService = ComponentAccessor.getComponent(UserSearchService)
-		
-		boolean allowEmptyQuery = true
-		boolean includeActive = true
-		boolean includeInactive = false
-		boolean canMatchEmail = false
-		def userFilter = null
-		def projectIds = null
-		
-		UserSearchParams allUserParams = new UserSearchParams(allowEmptyQuery, includeActive, includeInactive, canMatchEmail, userFilter as UserFilter, projectIds as Set<Long>)
-		return userSearchService.findUsers('', allUserParams)
+		getUsersByQuery(true, true, false, false, null, null)
 	}
 	
 	Collection<ApplicationUser> getUsersByQuery(boolean allowEmptyQuery = true, boolean includeActive = true, boolean includeInactive = true, boolean canMatchEmail = false, UserFilter userFilter = null, Set<Long> projectIds = null) {
