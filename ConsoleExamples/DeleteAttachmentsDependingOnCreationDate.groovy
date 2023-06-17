@@ -19,10 +19,15 @@ import com.atlassian.query.Query
 JqlQueryParser jqlQueryParser = ComponentAccessor.getComponent(JqlQueryParser) as JqlQueryParser
 SearchService searchService = ComponentAccessor.getComponent(SearchService)
 ApplicationUser user = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser()
+Calendar cal = Calendar.getInstance()
 
 String jqlQuery = "project = TEST AND attachments is not EMPTY"
-Date fromDate = new Date("01/01/2023")
-Date toDate = new Date("31/01/2023")
+
+cal.set(2023, 0, 01, 0, 0, 0)
+Date fromDate = cal.getTime()
+cal.clear()
+cal.set(2023, 0, 31, 23, 59, 59)
+Date toDate = cal.getTime()
 
 Query query = jqlQueryParser.parseQuery(jqlQuery)
 SearchResults search = searchService.search(user, query, PagerFilter.getUnlimitedFilter())

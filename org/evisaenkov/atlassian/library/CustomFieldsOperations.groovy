@@ -16,7 +16,6 @@ import com.atlassian.jira.issue.fields.config.FieldConfig
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.config.managedconfiguration.ConfigurationItemAccessLevel
 import com.atlassian.jira.config.managedconfiguration.ManagedConfigurationItemService
-import com.atlassian.jira.issue.CustomFieldManager
 import org.evisaenkov.atlassian.library.IssueOperations
 
 /**
@@ -24,10 +23,10 @@ import org.evisaenkov.atlassian.library.IssueOperations
  * @author Evgeniy Isaenkov
  */
 
-class CFOperations {
+class CustomFieldsOperations {
 	
-	private final IssueOperations issueOperations = new IssueOperations()
-	private final ManagedConfigurationItemService managedConfigurationItemService = ComponentAccessor.getComponent(ManagedConfigurationItemService)
+	IssueOperations issueOperations = new IssueOperations()
+	ManagedConfigurationItemService managedConfigurationItemService = ComponentAccessor.getComponent(ManagedConfigurationItemService)
 	
 	void updateCustomFieldValueWithIssueUpdate(String issueKey, Long customFieldId, newValue) {
 		CustomField customField = getCustomFieldObject(customFieldId)
@@ -37,19 +36,19 @@ class CFOperations {
 	}
 	
 	CustomField getCustomFieldObject(Long fieldId) {
-		return ComponentAccessor.customFieldManager.getCustomFieldObject(fieldId)
+		return ComponentAccessor.getCustomFieldManager().getCustomFieldObject(fieldId)
 	}
 	
 	CustomField getCustomFieldObject(String fieldName) {
-		return ComponentAccessor.customFieldManager.getCustomFieldObject(fieldName)
+		return ComponentAccessor.getCustomFieldManager().getCustomFieldObject(fieldName)
 	}
 	
 	def getCustomFieldValue(Issue issue, Long fieldId) {
-		return issue.getCustomFieldValue(ComponentAccessor.customFieldManager.getCustomFieldObject(fieldId))
+		return issue.getCustomFieldValue(ComponentAccessor.getCustomFieldManager().getCustomFieldObject(fieldId))
 	}
 	
 	def getCustomFieldValue(Issue issue, String fieldName) {
-		return issue.getCustomFieldValue(ComponentAccessor.customFieldManager.getCustomFieldObject(fieldName))
+		return issue.getCustomFieldValue(ComponentAccessor.getCustomFieldManager().getCustomFieldObject(fieldName))
 	}
 	
 	List getCustomFieldContext(Long fieldId, Long projectId, String issueTypeId) {
@@ -61,7 +60,7 @@ class CFOperations {
 	}
 	
 	List<CustomField> getAllCustomFieldObjects() {
-		return ComponentAccessor.customFieldManager.getCustomFieldObjects() as List<CustomField>
+		return ComponentAccessor.getCustomFieldManager().getCustomFieldObjects() as List<CustomField>
 	}
 	
 	void unlockLockedCustomField(String customFieldName) {
@@ -84,9 +83,9 @@ class CFOperations {
 			if (mci)
 			
 			{
-				ManagedConfigurationItemBuilder managedConfigurationItemBuilder = mci.newBuilder();
-				ManagedConfigurationItem updatedMci = managedConfigurationItemBuilder.setManaged(true).setConfigurationItemAccessLevel(ConfigurationItemAccessLevel.LOCKED).build();
-				managedConfigurationItemService.updateManagedConfigurationItem(updatedMci);
+				ManagedConfigurationItemBuilder managedConfigurationItemBuilder = mci.newBuilder()
+				ManagedConfigurationItem updatedMci = managedConfigurationItemBuilder.setManaged(true).setConfigurationItemAccessLevel(ConfigurationItemAccessLevel.LOCKED).build()
+				managedConfigurationItemService.updateManagedConfigurationItem(updatedMci)
 			}
 		}
 	}
