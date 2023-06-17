@@ -1,3 +1,5 @@
+package ConsoleExamples
+
 import com.onresolve.scriptrunner.ldap.LdapUtil
 
 import javax.naming.directory.BasicAttribute

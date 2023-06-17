@@ -1,3 +1,5 @@
+package ConsoleExamples
+
 import com.atlassian.greenhopper.service.sprint.Sprint
 import com.atlassian.jira.issue.MutableIssue
 import org.evisaenkov.atlassian.library.IssueOperations

@@ -1,3 +1,5 @@
+package ConsoleExamples
+
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.issue.AttachmentManager
 import com.atlassian.jira.issue.MutableIssue
@@ -19,7 +21,7 @@ SimpleDateFormat df = new SimpleDateFormat('dd/MM/yy hh:mm', new Locale('ru'))
 // Enter issue name where the attachment will be added
 MutableIssue issue = issueOperations.getIssue("TEST-1234")
 
-def mapcsvLine = [:]
+LinkedHashMap<Object, List> mapcsvLine = [:]
 String csvReturn = ''
 
 int i = 0
@@ -45,7 +47,7 @@ for (ApplicationUser user in userList) {
 }
 
 csvReturn += 'username;email;directoryId;Lastlogindate;status;groups \n'
-for (Map.Entry<Integer, List> entry : mapcsvLine.entrySet()) {
+for (Map.Entry<Object, List> entry : mapcsvLine.entrySet()) {
 	csvReturn += entry.getValue()[0].toString() + ';'
 	csvReturn += entry.getValue()[1].toString() + ';'
 	csvReturn += entry.getValue()[2].toString() + ';'

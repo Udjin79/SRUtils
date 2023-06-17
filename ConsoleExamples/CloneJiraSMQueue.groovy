@@ -1,3 +1,4 @@
+package ConsoleExamples
 /*
  * Copyright (c) 2023.
  * @author Evgeniy Isaenkov
