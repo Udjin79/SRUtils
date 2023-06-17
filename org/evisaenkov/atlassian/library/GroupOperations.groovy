@@ -50,11 +50,11 @@ class GroupOperations {
 		isUserInGroup(userOperations.getCurrentUser(), getGroup(groupName))
 	}
 	
-	void addUserInGroup(ApplicationUser user, Group group) {
+	void addUserToGroup(ApplicationUser user, Group group) {
 		ComponentAccessor.getGroupManager().addUserToGroup(user, group)
 	}
 	
-	def addUserInGroup(String userName, String groupName) {
+	def addUserToGroup(String userName, String groupName) {
 		ComponentAccessor.getGroupManager().addUserToGroup(userOperations.getUserByUsername(userName), getGroup(groupName))
 	}
 	
