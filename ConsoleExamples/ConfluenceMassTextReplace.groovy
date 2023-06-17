@@ -1,8 +1,10 @@
-package ConsoleExamples
 /*
- * Copyright (c) 2022.
+ * Created 2023.
  * @author Evgeniy Isaenkov
+ * @github https://github.com/Udjin79/SRUtils
  */
+
+package ConsoleExamples
 
 import com.atlassian.confluence.pages.Page
 import com.atlassian.confluence.pages.PageManager

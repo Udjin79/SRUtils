@@ -1,3 +1,9 @@
+/*
+ * Created 2023.
+ * @author Evgeniy Isaenkov
+ * @github https://github.com/Udjin79/SRUtils
+ */
+
 package ConsoleExamples
 
 import com.atlassian.jira.component.ComponentAccessor

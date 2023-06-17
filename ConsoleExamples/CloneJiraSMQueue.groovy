@@ -1,8 +1,10 @@
-package ConsoleExamples
 /*
- * Copyright (c) 2023.
+ * Created 2023.
  * @author Evgeniy Isaenkov
+ * @github https://github.com/Udjin79/SRUtils
  */
+
+package ConsoleExamples
 
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.project.Project

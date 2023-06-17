@@ -1,3 +1,11 @@
+/*
+ * Created 2023.
+ * @author Evgeniy Isaenkov
+ * @github https://github.com/Udjin79/SRUtils
+ */
+
+package ConsoleExamples
+
 import org.evisaenkov.atlassian.library.LdapOperations
 import org.apache.logging.log4j.Logger
 import org.apache.logging.log4j.LogManager
