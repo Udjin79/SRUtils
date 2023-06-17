@@ -7,6 +7,8 @@ package org.evisaenkov.atlassian.library
 
 import com.onresolve.scriptrunner.ldap.LdapUtil
 import org.springframework.ldap.core.AttributesMapper
+import org.apache.logging.log4j.Logger
+import org.apache.logging.log4j.LogManager
 
 import javax.naming.directory.*
 
@@ -17,6 +19,7 @@ class LdapOperations {
 	
 	Map ldapResult
 	String baseDN = 'OU=Users,OU=Synchronized'
+	Logger logger = LogManager.getLogger("org.evisaenkov.atlassian")
 	
 	/**
 	 * Retrieving user information from LDAP by his full or partial login
@@ -77,7 +80,7 @@ class LdapOperations {
 	}
 	
 	String getUsernameByFullName(String fullName) {
-		def usersList = LdapUtil.withTemplate('corporate') { template ->
+		List<String> usersList = LdapUtil.withTemplate('corporate') { template ->
 			template.search(baseDN, "(CN=*${fullName}*)", SearchControls.SUBTREE_SCOPE, { BasicAttributes attributes ->
 				attributes.get('samaccountname').get(0).toString()
 			} as AttributesMapper<String>)
@@ -114,7 +117,7 @@ class LdapOperations {
 	 * @return - mapped data, with group DN information
 	 */
 	Map getGroupDNByName(String query, String spaceDN, String connection) {
-		def results = LdapUtil.withTemplate(connection) { item ->
+		List<BasicAttributes> results = LdapUtil.withTemplate(connection) { item ->
 			item.search(spaceDN, "(&(objectClass=group)(name=${query}))", SearchControls.SUBTREE_SCOPE, { attributes ->
 				attributes
 			} as AttributesMapper<BasicAttributes>)
@@ -134,12 +137,12 @@ class LdapOperations {
 	
 	List<BasicAttributes> getADGroupsInfoBySpaceDN(String spaceDN, String adGroupName = '', String description = '') {
 		String query = description == '' ? "(name=*${adGroupName})" : "(name=*)(description=*${description}*)"
-		def groupsList = LdapUtil.withTemplate('corporate') { template ->
+		List<BasicAttributes> groupsList = LdapUtil.withTemplate('corporate') { template ->
 			template.search(spaceDN, "(&(objectClass=group)${query})", SearchControls.SUBTREE_SCOPE, { BasicAttributes attributes ->
 				try {
 					attributes
 				} catch (Exception e) {
-					log.warn(e.getMessage())
+					logger.warn(e.getMessage())
 				}
 			} as AttributesMapper<BasicAttributes>)
 		}
