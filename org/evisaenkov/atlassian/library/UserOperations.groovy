@@ -1,6 +1,7 @@
-/**
- * Copyright (c) 2022-2023.
+/*
+ * Created 2023.
  * @author Evgeniy Isaenkov
+ * @github https://github.com/Udjin79/SRUtils
  */
 
 package org.evisaenkov.atlassian.library
@@ -22,8 +23,8 @@ import org.evisaenkov.atlassian.library.Variables
 
 class UserOperations {
 	
-	private final UserManager userManager = ComponentAccessor.getUserManager()
-	private final UserSearchService userSearchService = ComponentAccessor.getComponent(UserSearchService.class)
+	UserManager userManager = ComponentAccessor.getUserManager()
+	UserSearchService userSearchService = ComponentAccessor.getComponent(UserSearchService.class)
 	
 	ApplicationUser getUser(String username) {
 		if (username && username.contains('JIRA')) {

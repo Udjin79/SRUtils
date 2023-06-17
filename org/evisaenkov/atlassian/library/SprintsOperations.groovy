@@ -1,6 +1,7 @@
 /*
- * Copyright (c) 2022-2023.
+ * Created 2023.
  * @author Evgeniy Isaenkov
+ * @github https://github.com/Udjin79/SRUtils
  */
 
 package org.evisaenkov.atlassian.library
@@ -20,8 +21,8 @@ import com.onresolve.scriptrunner.runner.customisers.WithPlugin
  */
 class SprintsOperations {
 	
-	private final UserOperations userOperations = new UserOperations()
-	private final ApplicationUser techUser = userOperations.getTechUser() as ApplicationUser
+	UserOperations userOperations = new UserOperations()
+	ApplicationUser techUser = userOperations.getTechUser() as ApplicationUser
 	
 	@WithPlugin('com.pyxis.greenhopper.jira')
 	@JiraAgileBean

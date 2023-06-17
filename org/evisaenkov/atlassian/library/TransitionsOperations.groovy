@@ -1,6 +1,7 @@
 /*
- * Copyright (c) 2023.
+ * Created 2023.
  * @author Evgeniy Isaenkov
+ * @github https://github.com/Udjin79/SRUtils
  */
 
 package org.evisaenkov.atlassian.library
@@ -21,10 +22,10 @@ import org.evisaenkov.atlassian.library.IssueOperations
  */
 class TransitionsOperations {
 	
-	private final UserOperations userOperations = new UserOperations()
-	private final CommentsOperations commentsOperations = new CommentsOperations()
-	private final IssueOperations issueOperations = new IssueOperations()
-	private final ApplicationUser techUser = userOperations.getTechUser() as ApplicationUser
+	UserOperations userOperations = new UserOperations()
+	CommentsOperations commentsOperations = new CommentsOperations()
+	IssueOperations issueOperations = new IssueOperations()
+	ApplicationUser techUser = userOperations.getTechUser() as ApplicationUser
 	
 	boolean doTransition(MutableIssue issue, int actionId, boolean skipConditions = false, boolean skipPermissions = false, boolean skipValidators = false, String username = techUser.username) {
 		ApplicationUser user = userOperations.getUser(username) as ApplicationUser

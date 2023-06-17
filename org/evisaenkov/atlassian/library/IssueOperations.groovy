@@ -1,6 +1,7 @@
 /*
- * Copyright (c) 2022-2023.
+ * Created 2023.
  * @author Evgeniy Isaenkov
+ * @github https://github.com/Udjin79/SRUtils
  */
 package org.evisaenkov.atlassian.library
 
@@ -43,15 +44,15 @@ import java.sql.Timestamp
 
 class IssueOperations {
 	
-	private final UserOperations userOperations = new UserOperations()
-	private final ProjectManager projectManager = ComponentAccessor.getProjectManager()
-	private final ProjectComponentManager projectComponentManager = ComponentAccessor.getProjectComponentManager()
-	private final ConstantsManager constantsManager = ComponentAccessor.getConstantsManager()
-	private final CustomFieldManager customFieldManager = ComponentAccessor.getCustomFieldManager()
-	private final IssueManager issueManager = ComponentAccessor.getIssueManager()
-	private final JqlQueryParser jqlQueryParser = ComponentAccessor.getComponent(JqlQueryParser) as JqlQueryParser
-	private final SearchService searchService = ComponentAccessor.getComponent(SearchService)
-	private final ApplicationUser techUser = userOperations.getTechUser()
+	UserOperations userOperations = new UserOperations()
+	ProjectManager projectManager = ComponentAccessor.getProjectManager()
+	ProjectComponentManager projectComponentManager = ComponentAccessor.getProjectComponentManager()
+	ConstantsManager constantsManager = ComponentAccessor.getConstantsManager()
+	CustomFieldManager customFieldManager = ComponentAccessor.getCustomFieldManager()
+	IssueManager issueManager = ComponentAccessor.getIssueManager()
+	JqlQueryParser jqlQueryParser = ComponentAccessor.getComponent(JqlQueryParser) as JqlQueryParser
+	SearchService searchService = ComponentAccessor.getComponent(SearchService)
+	ApplicationUser techUser = userOperations.getTechUser()
 	
 	String makeIssue(Map issueBody, Map cfBody = [:]) {
 		/**

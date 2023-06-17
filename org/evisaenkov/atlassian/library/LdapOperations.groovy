@@ -1,6 +1,7 @@
 /*
- * Copyright (c) 2022-2023.
+ * Created 2023.
  * @author Evgeniy Isaenkov
+ * @github https://github.com/Udjin79/SRUtils
  */
 
 package org.evisaenkov.atlassian.library
@@ -39,9 +40,7 @@ class LdapOperations {
 			} as AttributesMapper<BasicAttributes>)
 		}
 		
-		Map<Object, Object> result = [:]
-		
-		result = results.collect { BasicAttributes user ->
+		Map<Object, Object> result = results.collect { BasicAttributes user ->
 			[
 					username  : user.get('samaccountname').get(0).toString(),
 					memberOf  : user.get('memberof').getAll()*.replaceAll(/(CN=)(.*?),.*/, /$2/),
@@ -123,9 +122,7 @@ class LdapOperations {
 			} as AttributesMapper<BasicAttributes>)
 		}
 		
-		Map<Object, Object> result = [:]
-		
-		result = results.collect { BasicAttributes group ->
+		Map<Object, Object> result = results.collect { BasicAttributes group ->
 			[
 					name   : group.get('samaccountname').get(0).toString(),
 					members: group.get('member') ? group.get('member').getAll()*.replaceAll(/(CN=)(.*?),.*/, /$2/) : null,

@@ -1,6 +1,7 @@
 /*
- * Copyright (c) 2023.
+ * Created 2023.
  * @author Evgeniy Isaenkov
+ * @github https://github.com/Udjin79/SRUtils
  */
 
 package org.evisaenkov.atlassian.library
@@ -25,9 +26,9 @@ import org.evisaenkov.atlassian.library.UserOperations
 
 class FiltersOperations {
 	
-	private final UserOperations userOperations = new UserOperations()
-	private final SearchRequestService searchRequestService = ComponentAccessor.getComponent(SearchRequestService)
-	private final JqlQueryParser jqlQueryParser = ComponentAccessor.getComponent(JqlQueryParser)
+	UserOperations userOperations = new UserOperations()
+	SearchRequestService searchRequestService = ComponentAccessor.getComponent(SearchRequestService)
+	JqlQueryParser jqlQueryParser = ComponentAccessor.getComponent(JqlQueryParser)
 	
 	void findAndReplaceInFilters(String find, String replaceTo) {
 		searchTextByAllFilters(find).each { SearchRequest filter ->

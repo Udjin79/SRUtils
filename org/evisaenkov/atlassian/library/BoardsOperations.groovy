@@ -1,6 +1,7 @@
 /*
- * Copyright (c) 2023.
+ * Created 2023.
  * @author Evgeniy Isaenkov
+ * @github https://github.com/Udjin79/SRUtils
  */
 
 package org.evisaenkov.atlassian.library
@@ -21,8 +22,8 @@ import com.atlassian.greenhopper.model.rapid.BoardAdmin.Type
  */
 class BoardsOperations {
 	
-	private final UserOperations userOperations = new UserOperations()
-	private final ApplicationUser techUser = userOperations.getTechUser() as ApplicationUser
+	UserOperations userOperations = new UserOperations()
+	ApplicationUser techUser = userOperations.getTechUser() as ApplicationUser
 	
 	@WithPlugin('com.pyxis.greenhopper.jira')
 	@JiraAgileBean

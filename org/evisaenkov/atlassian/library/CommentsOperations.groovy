@@ -1,6 +1,7 @@
 /*
- * Copyright (c) 2023.
+ * Created 2023.
  * @author Evgeniy Isaenkov
+ * @github https://github.com/Udjin79/SRUtils
  */
 
 package org.evisaenkov.atlassian.library
@@ -20,10 +21,10 @@ import java.util.function.BiFunction
  */
 class CommentsOperations {
 	
-	private final CommentManager commentManager = ComponentAccessor.getCommentManager()
-	private final UserOperations userOperations = new UserOperations()
-	private final JsonEntityPropertyManager jsonManager = ComponentAccessor.getComponent(JsonEntityPropertyManager)
-	private final ApplicationUser techUser = userOperations.getTechUser()
+	CommentManager commentManager = ComponentAccessor.getCommentManager()
+	UserOperations userOperations = new UserOperations()
+	JsonEntityPropertyManager jsonManager = ComponentAccessor.getComponent(JsonEntityPropertyManager)
+	ApplicationUser techUser = userOperations.getTechUser()
 	
 	void addComment(MutableIssue issue, String comment, Boolean event = true) {
 		commentManager.create(issue, techUser, comment, event)
