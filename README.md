@@ -15,7 +15,7 @@ Please feel free to contact me.
 
 ### 📫 How to reach me?
 - [LinkedIn](https://www.linkedin.com/in/udjin79/)
-
+- [Telegram](https://t.me/IEV79)
 
 ### 🌱 README.md In the process of filling.
 TBD:
@@ -27,6 +27,7 @@ TBD:
 - Examples of Jobs
 - Examples of Scripted fields
 - Examples of JQL functions
+- Examples of functions, for different tasks, which can be run from console
  
 Useful links, that helped me at beginning:
 
