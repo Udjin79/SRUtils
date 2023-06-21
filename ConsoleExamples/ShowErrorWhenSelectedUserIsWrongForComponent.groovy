@@ -4,6 +4,24 @@
  * @github https://github.com/Udjin79/SRUtils
  */
 
+/*
+ * Created 2023.
+ * @author Evgeniy Isaenkov
+ * @github https://github.com/Udjin79/SRUtils
+ */
+
+/*
+ * Created 2023.
+ * @author Evgeniy Isaenkov
+ * @github https://github.com/Udjin79/SRUtils
+ */
+
+/*
+ * Created 2023.
+ * @author Evgeniy Isaenkov
+ * @github https://github.com/Udjin79/SRUtils
+ */
+
 package ConsoleExamples
 
 import com.atlassian.jira.bc.project.component.ProjectComponent
@@ -12,8 +30,8 @@ import com.onresolve.jira.groovy.user.FormField
 import groovy.transform.BaseScript
 
 @BaseScript FieldBehaviours fieldBehaviours
-FormField changeManager = getFieldById('customfield_19001')
-List<ProjectComponent> components = getFieldById(fieldChanged).value as List<ProjectComponent>
+FormField changeManager = getFieldById(getFieldChanged())
+List<ProjectComponent> components = getFieldById("components").getValue() as List<ProjectComponent>
 changeManager.clearError()
 
 Map managers = [
@@ -24,12 +42,10 @@ Map managers = [
 
 List<String> intersections = components.name.intersect(managers.keySet())
 
-if (changeManager.value && intersections) {
+if (changeManager && intersections) {
 	intersections.each { String key ->
-		if (!changeManager.value.toString() in managers[key]['users']) {
-			changeManager.setError("$changeManager.value ${managers[key]['message']}")
+		if (!(changeManager.value.toString() in managers[key]['users'])) {
+			changeManager.value ? changeManager.setError("$changeManager.value ${managers[key]['message']}") : changeManager.clearError()
 		}
 	}
 }
-
-
