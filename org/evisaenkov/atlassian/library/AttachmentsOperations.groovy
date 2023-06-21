@@ -4,12 +4,6 @@
  * @github https://github.com/Udjin79/SRUtils
  */
 
-/*
- * Created 2023.
- * @author Evgeniy Isaenkov
- * @github https://github.com/Udjin79/SRUtils
- */
-
 package org.evisaenkov.atlassian.library
 
 import com.atlassian.jira.issue.Issue
