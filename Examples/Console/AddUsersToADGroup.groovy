@@ -4,7 +4,7 @@
  * @github https://github.com/Udjin79/SRUtils
  */
 
-package ConsoleExamples
+package Examples.Console
 
 import org.evisaenkov.atlassian.library.LdapOperations
 import org.apache.logging.log4j.Logger

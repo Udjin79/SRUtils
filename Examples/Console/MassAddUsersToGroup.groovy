@@ -4,7 +4,7 @@
  * @github https://github.com/Udjin79/SRUtils
  */
 
-package ConsoleExamples
+package Examples.Console
 
 import com.atlassian.crowd.embedded.api.Group
 import org.evisaenkov.atlassian.library.GroupOperations

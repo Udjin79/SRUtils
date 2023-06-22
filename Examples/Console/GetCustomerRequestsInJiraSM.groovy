@@ -4,7 +4,7 @@
  * @github https://github.com/Udjin79/SRUtils
  */
 
-package ConsoleExamples
+package Examples.Console
 
 import com.atlassian.servicedesk.api.ServiceDesk
 import com.atlassian.servicedesk.api.util.paging.PagedResponse

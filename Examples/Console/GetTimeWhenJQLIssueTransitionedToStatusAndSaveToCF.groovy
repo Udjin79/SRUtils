@@ -4,7 +4,7 @@
  * @github https://github.com/Udjin79/SRUtils
  */
 
-package ConsoleExamples
+package Examples.Console
 
 import com.atlassian.jira.bc.issue.search.SearchService
 import com.atlassian.jira.component.ComponentAccessor

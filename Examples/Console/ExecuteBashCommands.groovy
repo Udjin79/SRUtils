@@ -4,7 +4,7 @@
  * @github https://github.com/Udjin79/SRUtils
  */
 
-package ConsoleExamples
+package Examples.Console
 
 /**
  * Execution on *nix commands is pretty simple, just use method execute(), available for String objects.

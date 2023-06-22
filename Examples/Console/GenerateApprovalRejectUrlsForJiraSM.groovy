@@ -4,7 +4,7 @@
  * @github https://github.com/Udjin79/SRUtils
  */
 
-package ConsoleExamples
+package Examples.Console
 
 /**
  * Generates approval/reject URLs for issues with approvals in Jira SM.
