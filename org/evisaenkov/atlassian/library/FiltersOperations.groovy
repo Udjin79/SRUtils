@@ -92,7 +92,7 @@ class FiltersOperations {
 		return filter.getOwner()
 	}
 	
-	void setNewOwnerFilter(long filterId, ApplicationUser newOwnerUser) {
+	void setOwner(long filterId, ApplicationUser newOwnerUser) {
 		SearchRequest filter = getFilter(filterId, userOperations.getTechUser())
 		filter.setOwner(newOwnerUser)
 		updateFilter(filter)

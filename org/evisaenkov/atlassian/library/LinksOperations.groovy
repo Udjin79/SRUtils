@@ -32,7 +32,7 @@ import org.evisaenkov.atlassian.library.Variables
  * Class for links operations with SR Jira
  * @author Evgeniy Isaenkov
  */
-class Links {
+class LinksOperations {
 	
 	UserOperations userOperations = new UserOperations()
 	
