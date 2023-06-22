@@ -8,7 +8,7 @@ package Examples.Behaviours
 
 // Limit issue types, depending from user Role in project
 import com.atlassian.jira.component.ComponentAccessor
-import com.atlassian.jira.issue.IssueFieldConstants.ISSUE_TYPE
+import static com.atlassian.jira.issue.IssueFieldConstants.ISSUE_TYPE
 import com.atlassian.jira.issue.issuetype.IssueType
 import com.atlassian.jira.security.roles.ProjectRoleManager
 import com.atlassian.jira.user.ApplicationUser
