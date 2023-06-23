@@ -14,7 +14,7 @@ Experience in:
 Please feel free to contact me.
 
 ### 📫 How to reach me?
-- [LinkedIn](https://www.linkedin.com/in/udjin79/)
+- [LinkedIn](https://www.linkedin.com/in/iev79/)
 - [Telegram](https://t.me/IEV79)
 
 ### 🌱 README.md In the process of filling.
