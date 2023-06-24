@@ -46,7 +46,13 @@ class RolesOperations {
 		return projectRoleManager.getProjectRole(projectRoleName)
 	}
 	
-	Collection<ApplicationUser> getUsersOnProjectRole(Project project, ProjectRole role) {
+	Collection<ApplicationUser> getUsersInProjectRole(Project project, ProjectRole role) {
+		return projectRoleManager.getProjectRoleActors(role, project)?.getApplicationUsers()
+	}
+	
+	Collection<ApplicationUser> getUsersInProjectRole(String projectName, String roleName) {
+		ProjectRole role = getProjectRole(roleName)
+		Project project = projectOperations.getProject(projectName)
 		return projectRoleManager.getProjectRoleActors(role, project)?.getApplicationUsers()
 	}
 	
