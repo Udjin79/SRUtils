@@ -12,7 +12,7 @@ import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.issue.Issue
 import com.atlassian.jira.project.Project
 
-class Components {
+class ComponentsOperations {
 	ProjectComponentManager projectComponentManager = ComponentAccessor.getProjectComponentManager()
 	
 	Collection<ProjectComponent> getComponents(Project project) {
