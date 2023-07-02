@@ -40,6 +40,20 @@ class ProjectOperations {
 		return projectManager.getProjectObj(projectId)
 	}
 	
+	Map getProjectData(String projectKey) {
+		Map projectData = [:]
+		Project project = getProject(projectKey)
+		projectData.put("ID", project.id)
+		projectData.put("Key", project.key)
+		projectData.put("Name", project.name)
+		projectData.put("Lead", project.getProjectLead())
+		projectData.put("Components", project.components)
+		if (project.projectCategory) {
+			projectData.put("Category", project.projectCategory)
+		}
+		return projectData
+	}
+	
 	ApplicationUser getProjectLead(String projectKey) {
 		Project prj = projectManager.getProjectObjByKey(projectKey)
 		return prj.getProjectLead()
