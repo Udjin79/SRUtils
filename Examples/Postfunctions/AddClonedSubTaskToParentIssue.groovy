@@ -16,7 +16,7 @@ IssueManager issueManager = ComponentAccessor.getIssueManager()
 ConstantsManager constantsManager = ComponentAccessor.getConstantsManager()
 
 MutableIssue issue = issue as MutableIssue
-MutableIssue parentIssue = issueManager.getIssueObject(issue.key)
+MutableIssue parentIssue = issueManager.getIssueObject(issue.parentObject.key)
 ApplicationUser user = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser()
 
 // Set exact name of sub task you're trying to create
