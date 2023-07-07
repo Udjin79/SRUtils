@@ -21,7 +21,7 @@ CustomFieldManager customFieldManager = ComponentAccessor.getCustomFieldManager(
 UserManager userManager = ComponentAccessor.getUserManager()
 IssueIndexingService issueIndexingService = ComponentAccessor.getComponent(IssueIndexingService)
 
-List<List> changeItems = event.changeLog.getRelated("ChildChangeItem")
+def changeItem = event.changeLog.getRelated("ChildChangeItem")
 MutableIssue issue = issueManager.getIssue(event.getIssue().id) as MutableIssue
 
 // Set field names
@@ -32,9 +32,9 @@ CustomField approvedDateField = customFieldManager.getCustomFieldObject(approved
 // Set service account, that will make changes in issues
 ApplicationUser user = userManager.getUserByName('serviceAccount')
 
-if (changeItems.find { List pair -> pair[1] == approverFieldName }) {
+if (changeItem['field'].first() == approverFieldName) {
 	Date currentDate = new Date()
-	issue.setCustomFieldValue(approvedDateField, currentDate.time)
+	issue.setCustomFieldValue(approvedDateField, currentDate.toTimestamp())
 	issueManager.updateIssue(user, issue, EventDispatchOption.DO_NOT_DISPATCH, false)
 	issueIndexingService.reIndex(issue)
 }
