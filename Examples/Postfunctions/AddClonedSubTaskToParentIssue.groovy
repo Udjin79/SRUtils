@@ -10,6 +10,7 @@ import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.config.ConstantsManager
 import com.atlassian.jira.issue.IssueManager
 import com.atlassian.jira.issue.MutableIssue
+import com.atlassian.jira.issue.issuetype.IssueType
 import com.atlassian.jira.user.ApplicationUser
 
 IssueManager issueManager = ComponentAccessor.getIssueManager()
@@ -20,19 +21,24 @@ MutableIssue parentIssue = issueManager.getIssueObject(issue.parentObject.key)
 ApplicationUser user = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser()
 
 // Set exact name of sub task you're trying to create
-String issueType = "Sub-Bug"
+String issueTypeName = "Sub-Bug"
 
-MutableIssue newIssue = ComponentAccessor.getIssueFactory().getIssue()
-newIssue.setProjectObject(issue.getProjectObject())
-newIssue.setIssueType(constantsManager.allIssueTypeObjects.findByName(issueType))
-newIssue.setSummary("BUG: ${issue.summary}")
-newIssue.setDescription(issue.description)
-newIssue.setAssignee(issue.assignee)
-newIssue.setReporter(user)
-newIssue.setLabels(null)
-newIssue.setComponent(null)
-newIssue.setPriorityId('3')
-newIssue.setDueDate(null)
-ComponentAccessor.issueManager.createIssueObject(user, newIssue)
+IssueType issueType = constantsManager.allIssueTypeObjects.findByName(issueTypeName)
 
-ComponentAccessor.subTaskManager.createSubTaskIssueLink(parentIssue, newIssue, user)
+if (issueType) {
+	MutableIssue newIssue = ComponentAccessor.getIssueFactory().getIssue()
+	newIssue.setProjectObject(issue.getProjectObject())
+	newIssue.setIssueType(issueType)
+	newIssue.setSummary("BUG: ${issue.summary}")
+	newIssue.setDescription(issue.description)
+	newIssue.setAssignee(issue.assignee)
+	newIssue.setReporter(user)
+	newIssue.setLabels(null)
+	newIssue.setComponent(null)
+	newIssue.setPriorityId('3')
+	newIssue.setDueDate(null)
+	ComponentAccessor.issueManager.createIssueObject(user, newIssue)
+	
+	ComponentAccessor.subTaskManager.createSubTaskIssueLink(parentIssue, newIssue, user)
+}
+
