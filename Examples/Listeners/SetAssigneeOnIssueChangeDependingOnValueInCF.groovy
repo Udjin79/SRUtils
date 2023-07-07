@@ -30,12 +30,12 @@ CustomField epicLink = customFieldManager.getCustomFieldObject("Epic Link")
 Map temp = issue.getCustomFieldValue(cField) as Map
 String cFieldValue = temp.get(null).toString()
 
-Map variables = [
+Map<String, List<String>> variables = [
 		"COBOL/DBA/Mainframe Team": ["GOXFUNC-5611", "x-cteam", "COBOL/DBA/Mainframe Team"],
-		"BASIS-Team"              : ["GOXFUNC-6635", "x-bteam", "Backdesk Team", 11201],
+		"BASIS-Team"              : ["GOXFUNC-6635", "x-bteam", "Backdesk Team", "11201"],
 		"UCD Team"                : ["GOXFUNC-6488", "x-uteam", "UCD Team"],
 		"Java Team"               : ["GOXFUNC-6633", "x-jteam", "Java Team"],
-		"KM-Tools Team"           : ["GOXFUNC-6634", "x-kteam", "KM-Tools Team", 11201],
+		"KM-Tools Team"           : ["GOXFUNC-6634", "x-kteam", "KM-Tools Team", "11201"],
 		"PL/Infra/KM"             : ["GOXFUNC-5435", "x-pteam", "Production Line Team"],
 		"Others"                  : [null, "x-pteam", "Other"]
 ]
