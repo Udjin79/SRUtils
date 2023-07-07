@@ -22,13 +22,13 @@ UserManager userManager = ComponentAccessor.getUserManager()
 IssueIndexingService issueIndexingService = ComponentAccessor.getComponent(IssueIndexingService)
 
 def changeItem = event.changeLog.getRelated("ChildChangeItem")
-MutableIssue issue = issueManager.getIssue(event.getIssue().id) as MutableIssue
+MutableIssue issue = issueManager.getIssueObject(event.getIssue().id) as MutableIssue
 
 // Set field names
 String approverFieldName = "Approved By"
 String approvedDateFieldName = "Approved Date"
 
-CustomField approvedDateField = customFieldManager.getCustomFieldObject(approvedDateFieldName)
+CustomField approvedDateField = customFieldManager.getCustomFieldObjectByName(approvedDateFieldName)
 // Set service account, that will make changes in issues
 ApplicationUser user = userManager.getUserByName('serviceAccount')
 
