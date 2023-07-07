@@ -159,6 +159,9 @@ class IssueOperations {
 	Collection<IssueType> getAllIssueTypes() {
 		Collection<IssueType> allIssueTypes = ComponentAccessor.constantsManager.allIssueTypeObjects
 		return allIssueTypes
-		
+	}
+	
+	MutableIssue getParentIssue(Issue subTask) {
+		return getIssue(subTask.getParentObject().key)
 	}
 }

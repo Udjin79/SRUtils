@@ -18,6 +18,7 @@ import com.atlassian.jira.issue.changehistory.ChangeHistoryManager
 import com.atlassian.jira.issue.fields.CustomField
 import com.atlassian.jira.issue.status.Status
 import com.atlassian.jira.ofbiz.OfBizDelegator
+import com.atlassian.jira.event.issue.IssueEvent
 import org.evisaenkov.atlassian.library.CustomFieldsOperations
 
 /**
@@ -86,4 +87,18 @@ class HistoryOperations {
 		return statusManager.getStatus(id)
 	}
 	
+	Map changeData(IssueEvent event) {
+		def changeItem = event.changeLog.getRelated("ChildChangeItem")
+		Map changeData = [
+				"newvalue" : changeItem["newvalue"],
+				"oldvalue" : changeItem["oldvalue"],
+				"field"    : changeItem["field"],
+				"oldstring": changeItem["oldstring"],
+				"newstring": changeItem["newstring"],
+				"id"       : changeItem["id"],
+				"fieldtype": changeItem["fieldtype"],
+				"group"    : changeItem["group"]
+		]
+		return changeData
+	}
 }
