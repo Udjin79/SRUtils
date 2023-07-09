@@ -10,7 +10,6 @@ import com.atlassian.jira.project.Project
 import com.atlassian.jira.security.roles.ProjectRole
 import org.evisaenkov.atlassian.library.ProjectOperations
 import org.evisaenkov.atlassian.library.RolesOperations
-import org.evisaenkov.atlassian.library.UserOperations
 
 RolesOperations rolesOperations = new RolesOperations()
 ProjectOperations projectOperations = new ProjectOperations()
@@ -22,7 +21,7 @@ Collection<ProjectRole> rolesList = rolesOperations.getAllRoles()
 
 
 rolesList.each { ProjectRole role ->
-	List users = rolesOperations.getUsersOnProjectRole(prj, role).collect {
+	List users = rolesOperations.getUsersInProjectRole(prj, role).collect {
 		if (it.active) {
 			it.getUsername()
 		}
