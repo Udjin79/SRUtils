@@ -16,7 +16,7 @@ Integer i = 0
 
 Collection<IssueTypeScreenScheme> schemes = issueTypeScreenSchemeManager.getIssueTypeScreenSchemes()
 schemes.each { IssueTypeScreenScheme scheme ->
-	if (issueTypeScreenSchemeManager.getProjects(scheme).size() == 0) {
+	if (scheme.getName() != "Default Issue Type Screen Scheme" && issueTypeScreenSchemeManager.getProjects(scheme).size() == 0) {
 		report += "${scheme.getName()}<br/>"
 		issueTypeScreenSchemeManager.removeIssueTypeSchemeEntities(scheme)
 		issueTypeScreenSchemeManager.removeIssueTypeScreenScheme(scheme)
@@ -25,5 +25,3 @@ schemes.each { IssueTypeScreenScheme scheme ->
 }
 
 return "Total: ${i}<br/>" + report
-
-
