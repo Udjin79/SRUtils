@@ -20,7 +20,17 @@ class WatchersOperations {
 		ComponentAccessor.watcherManager.startWatching(user, issue)
 	}
 	
+	void startWatching(String username, Issue issue) {
+		ApplicationUser user = ComponentAccessor.getUserManager().getUserByName(username)
+		ComponentAccessor.watcherManager.startWatching(user, issue)
+	}
+	
 	void stopWatching(ApplicationUser user, Issue issue) {
+		ComponentAccessor.watcherManager.stopWatching(user, issue)
+	}
+	
+	void stopWatching(String username, Issue issue) {
+		ApplicationUser user = ComponentAccessor.getUserManager().getUserByName(username)
 		ComponentAccessor.watcherManager.stopWatching(user, issue)
 	}
 	

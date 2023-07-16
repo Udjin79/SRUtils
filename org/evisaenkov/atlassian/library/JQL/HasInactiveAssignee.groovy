@@ -1,8 +1,10 @@
 /*
- * @author Adaptavist
+ * Created 2023.
+ * @author Evgeniy Isaenkov
+ * @github https://github.com/Udjin79/SRUtils
  */
 
-package Examples.JQL
+package org.evisaenkov.atlassian.library.JQL
 
 import com.atlassian.crowd.embedded.api.User
 import com.atlassian.jira.component.ComponentAccessor
@@ -65,6 +67,7 @@ class HasInactiveAssignee extends AbstractScriptedJqlFunction implements JqlQuer
 				}
 			}
 			catch (NullPointerException NPE) {
+				log.warn(NPE.message)
 			}
 		}
 		return boolQueryBuilder.build()
