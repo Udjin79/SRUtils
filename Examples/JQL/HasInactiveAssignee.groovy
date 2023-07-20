@@ -4,7 +4,7 @@
  * @github https://github.com/Udjin79/SRUtils
  */
 
-package org.evisaenkov.atlassian.library.JQL
+package Examples.JQL
 
 import com.atlassian.crowd.embedded.api.User
 import com.atlassian.jira.component.ComponentAccessor
