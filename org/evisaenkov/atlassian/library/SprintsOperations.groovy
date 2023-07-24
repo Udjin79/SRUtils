@@ -20,42 +20,47 @@ import com.onresolve.scriptrunner.runner.customisers.WithPlugin
  * @author Evgeniy Isaenkov
  */
 class SprintsOperations {
-	
-	UserOperations userOperations = new UserOperations()
-	ApplicationUser techUser = userOperations.getTechUser() as ApplicationUser
-	
-	@WithPlugin('com.pyxis.greenhopper.jira')
-	@JiraAgileBean
-	SprintIssueService sprintIssueService
-	@JiraAgileBean
-	SprintManager sprintManager
-	
-	Sprint getSprint(Long id) {
-		return sprintManager.getSprint(id).getValue()
-	}
-	
-	void deleteSprint(Long id) {
-		sprintManager.deleteSprint(getSprint(id))
-	}
-	
-	def getSprintsForView(RapidView board) {
-		return sprintManager.getSprintsForView(board).getValue()
-	}
-	
-	def getSprintsForIssue(Issue issue) {
-		return sprintIssueService.getSprintsForIssue(techUser, issue).getValue()
-	}
-	
-	def moveIssuesToSprint(Issue issue, Sprint sprint) {
-		sprintIssueService.moveIssuesToSprint(techUser, sprint, [issue] as Collection)
-	}
-	
-	def removeAllIssuesFromSprint(Sprint sprint) {
-		sprintIssueService.removeAllIssuesFromSprint(techUser, sprint)
-	}
-	
-	def moveIssuesToBacklog(Collection<Issue> issueList) {
-		sprintIssueService.moveIssuesToBacklog(techUser, issueList)
-	}
-	
+
+    UserOperations userOperations = new UserOperations()
+    ApplicationUser techUser = userOperations.getTechUser() as ApplicationUser
+
+    @WithPlugin('com.pyxis.greenhopper.jira')
+    @JiraAgileBean
+    SprintIssueService sprintIssueService
+    @JiraAgileBean
+    SprintManager sprintManager
+
+    Sprint getSprint(Long id) {
+        return sprintManager.getSprint(id).getValue()
+    }
+
+    void deleteSprint(Long id) {
+        sprintManager.deleteSprint(getSprint(id))
+    }
+
+    List<Sprint> getSprintsForView(RapidView board) {
+        return sprintManager.getSprintsForView(board).getValue()
+    }
+
+    List<Sprint> getSprintsForIssue(Issue issue) {
+        return sprintIssueService.getSprintsForIssue(techUser, issue).getValue() as List<Sprint>
+    }
+
+    Sprint getActiveSprintForIssue(Issue issue) {
+        def activeSprint = sprintIssueService.getActiveSprintForIssue(techUser, issue)
+        return activeSprint ? activeSprint.getValue().first() : null
+    }
+
+    def moveIssuesToSprint(Issue issue, Sprint sprint) {
+        sprintIssueService.moveIssuesToSprint(techUser, sprint, [issue] as Collection)
+    }
+
+    def removeAllIssuesFromSprint(Sprint sprint) {
+        sprintIssueService.removeAllIssuesFromSprint(techUser, sprint)
+    }
+
+    def moveIssuesToBacklog(Collection<Issue> issueList) {
+        sprintIssueService.moveIssuesToBacklog(techUser, issueList)
+    }
+
 }
