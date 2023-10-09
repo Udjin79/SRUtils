@@ -11,15 +11,15 @@ $headers = @{
 }
 
     # Get all fields from Jira
-    $fieldsResponse = Invoke-RestMethod -Uri "http://localhost:8080/rest/api/2/field" -Headers $headers -Method 'GET'
-    $fields = $fieldsResponse | Where-Object { $_.custom -eq $true }
-
+    $fieldsResponse = Invoke-RestMethod -Uri "http://localhost:8080/rest/api/2/customFields?startAt1&maxResults=1000&search=zzz" -Headers $headers -Method 'GET'
+    $fields = $fieldsResponse.values
+                Write-Host "Custom Field ID $CF_ID (Name: '$fields') is empty"
     # Iterate over each custom field
     foreach ($field in $fields) {
 	try {
-        $CF_ID = $field.schema.customId
+        $CF_ID = $field.numericId
         $FIELD_NAME = $field.name
-        # Check if $CF_ID is not null
+	# Check if $CF_ID is not null
         if ($CF_ID) {
 			
             # Check if the field is empty (by querying an issue with that field)
