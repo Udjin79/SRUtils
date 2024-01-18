@@ -1,35 +1,44 @@
-### ⚡ General information
-This repo is a collection of useful functions, made by me for automating of routine actions in Jira, with help of ScriptRunner
+# SRUtils - Jira/Confluence Automation Scripts
 
-### 💬 About me
-My name is _Evgeniy_ 
+## Introduction
+Welcome to SRUtils! This repository is a collection of Groovy scripts designed to simplify and automate routine actions in Jira and Confluence. Targeted at administrators and developers, these scripts leverage the power of ScriptRunner to enhance your Atlassian tool experience.
 
-I have 4+ years of experience in Atlassian tools - Jira, JiraSM, Confluence. 
+## Features
+- Automated workflow and screen configurations
+- Custom Jira issue scheme modifications
+- Advanced JQL functions
+- Scripted field generation
+
+## Getting Started
+1. **Installation**: Clone the repository.
+2. **Configuration**: Customize the scripts according to your Jira/Confluence setup.
+
+## Usage
+Here's how you can use SRUtils to improve your Jira/Confluence operations:
+- **Condition Scripts**: Apply conditions to workflows for enhanced control.
+- **Validator Scripts**: Ensure data integrity with custom validators.
+- **Listener Scripts**: Respond to events in real-time with automated actions.
+
+## Examples
+- **Automating User Assignments**: Automatically assign issues based on specific criteria.
+- **Custom Reporting**: Generate tailored reports from Jira data.
+
+## About the Author
+Evgeniy - an Atlassian tools specialist with over 5 years of experience. As a team lead and administrator, I've developed a deep understanding of Jira and Confluence.
 
 Experience in: 
 - Administration of Atlassian services (implementation , integration and development). 
 - Also I work with deeply customized workflows/screen/issue schemes, automations (Jira built-in and written in Groovy) . 
 - Team Management (as teamlead of unit, administering Atlassian tools). 
 
-Please feel free to contact me.
+## Contact
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/iev79/)
+- Telegram: [Telegram](https://t.me/IEV79)
 
-### 📫 How to reach me?
-- [LinkedIn](https://www.linkedin.com/in/iev79/)
-- [Telegram](https://t.me/IEV79)
+## Acknowledgements
+Special thanks to the Atlassian community and all contributors to this project.
 
-### 🌱 README.md In the process of filling.
-TBD:
-- Basic collections of functions, grouped by their type
-- Examples of Conditions
-- Examples of Validators
-- Examples of Behaviours
-- Examples of Listeners
-- Examples of Jobs
-- Examples of Scripted fields
-- Examples of JQL functions
-- Examples of functions, for different tasks, which can be run from console
- 
-Useful links, that helped me at beginning:
+## Useful links, that helped me at beginning:
 
 SR:
 - https://library.adaptavist.com/
