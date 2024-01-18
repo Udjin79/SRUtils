@@ -2,14 +2,17 @@
  * Created 2023.
  * @author Evgeniy Isaenkov
  * @github https://github.com/Udjin79/SRUtils
+ *
+ * This script is part of the Examples.Behaviours package in the SRUtils project. Its primary
+ * functionality is to control the availability of specific issue types in JIRA based on the
+ * user's group membership. It utilizes the JIRA Software Server API and ScriptRunner for custom
+ * field behavior. The script identifies users in specific groups ('Lawyers' and 'Top') and
+ * grants them access to a wider range of issue types, while restricting others to a default set.
  */
 
 package Examples.Behaviours
 
 import com.atlassian.crowd.embedded.api.Group
-
-/* Запрет на создание типов задач в зависимости от группы */
-
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.issue.issuetype.IssueType
 import com.atlassian.jira.user.ApplicationUser
@@ -19,26 +22,37 @@ import groovy.transform.BaseScript
 
 import static com.atlassian.jira.issue.IssueFieldConstants.ISSUE_TYPE
 
-@BaseScript FieldBehaviours fieldBehaviours
-Collection<IssueType> allIssueTypes = ComponentAccessor.constantsManager.allIssueTypeObjects
+@BaseScript FieldBehaviours fieldBehaviours; // Base script annotation for field behaviors.
 
-FormField issueTypeField = getFieldById(ISSUE_TYPE)
-ArrayList availableIssueTypes = []
+// Retrieve all available issue types.
+Collection<IssueType> allIssueTypes = ComponentAccessor.constantsManager.allIssueTypeObjects;
 
-ApplicationUser user = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser()
+// Access the issue type field.
+FormField issueTypeField = getFieldById(ISSUE_TYPE);
 
-Group lawers = ComponentAccessor.groupManager.getGroup('Lawers')
-Group tops = ComponentAccessor.groupManager.getGroup('Top')
+// Initialize a list to store available issue types.
+ArrayList<IssueType> availableIssueTypes = new ArrayList<>();
 
-List<String> whiteList = []
+// Get the currently logged-in user.
+ApplicationUser user = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser();
 
-whiteList.addAll(ComponentAccessor.groupManager.getUserNamesInGroup(tops))
-whiteList.addAll(ComponentAccessor.groupManager.getUserNamesInGroup(lawers))
+// Access groups 'Lawyers' and 'Top'.
+Group lawyers = ComponentAccessor.groupManager.getGroup("Lawyers");
+Group tops = ComponentAccessor.groupManager.getGroup("Top");
 
-if (whiteList.unique().contains(user.getName())) {
-	availableIssueTypes.addAll(allIssueTypes.findAll { it.name in ['Task', 'Epic', 'Classified Task'] })
+// Create a list to store usernames in the 'Lawyers' and 'Top' groups.
+List<String> whiteList = new ArrayList<>();
+whiteList.addAll(ComponentAccessor.groupManager.getUserNamesInGroup(tops));
+whiteList.addAll(ComponentAccessor.groupManager.getUserNamesInGroup(lawyers));
+
+// Check if the current user is in the whitelist.
+if (whiteList.contains(user.getName())) {
+	// If the user is in the whitelist, allow access to specific issue types.
+	availableIssueTypes.addAll(allIssueTypes.findAll { it.name in ['Task', 'Epic', 'Classified Task'] });
 } else {
-	availableIssueTypes.addAll(allIssueTypes.findAll { it.name in ['Task'] })
+	// If the user is not in the whitelist, restrict to 'Task' issue type only.
+	availableIssueTypes.addAll(allIssueTypes.findAll { it.name in ['Task'] });
 }
 
-issueTypeField.setFieldOptions(availableIssueTypes)
+// Set the available issue types as field options.
+issueTypeField.setFieldOptions(availableIssueTypes);
