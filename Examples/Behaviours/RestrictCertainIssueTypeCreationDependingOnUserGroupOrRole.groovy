@@ -3,14 +3,13 @@
  * @author Evgeniy Isaenkov
  * @github https://github.com/Udjin79/SRUtils
  *
- * This script is designed for JIRA and implements custom behavior for issue type fields
+ * This script is part of the Examples.Behaviours package in the SRUtils project.
+ * It is designed for JIRA and implements custom behavior for issue type fields
  * based on the user's role within a project. It uses the JIRA Software Server API and ScriptRunner.
  * The primary functionality involves restricting the available issue types for users
  * based on their roles. For instance, users with the 'Lawyers' role have access to a broader
  * range of issue types compared to other users.
  *
- * This script is part of the Behaviours module in the SRUtils package, which provides
- * various utilities for enhancing JIRA's functionality.
  */
 
 package Examples.Behaviours

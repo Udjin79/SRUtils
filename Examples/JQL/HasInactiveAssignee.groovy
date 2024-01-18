@@ -55,21 +55,34 @@ class HasInactiveAssignee extends AbstractScriptedJqlFunction implements JqlQuer
 	
 	@Override
 	Query getQuery(QueryCreationContext queryCreationContext, FunctionOperand operand, TerminalClause terminalClause) {
+		// Get the JiraAuthenticationContext and logged-in ApplicationUser
 		JiraAuthenticationContext context = ComponentAccessor.getJiraAuthenticationContext()
 		ApplicationUser applicationUser = context.getLoggedInUser()
+		
+		// Create a BooleanQuery builder
 		BooleanQuery.Builder boolQueryBuilder = new BooleanQuery.Builder()
+		
+		// Get a list of issues using the provided subquery
 		issues = getIssues(operand.args[0], applicationUser)
+		
+		// Iterate through each issue
 		issues.each { Issue issue ->
 			try {
+				// Check if the assignee of the issue is inactive
 				boolean active = issue.assignee.isActive()
+				
+				// If the assignee is inactive, add the issue to the BooleanQuery
 				if (!active) {
 					boolQueryBuilder.add(new TermQuery(new Term('issue_id', issue.id as String)), BooleanClause.Occur.SHOULD)
 				}
 			}
 			catch (NullPointerException NPE) {
+				// Handle any NullPointerException and log a warning message
 				log.warn(NPE.message)
 			}
 		}
+		
+		// Build and return the BooleanQuery
 		return boolQueryBuilder.build()
 	}
 }

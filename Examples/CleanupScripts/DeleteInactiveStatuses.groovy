@@ -23,18 +23,20 @@ Set<Status> activeStatus = []
 Integer i = 0
 String report = ""
 
+// Iterate through all workflows and collect their linked statuses
 workflows.each { JiraWorkflow workflow ->
 	activeStatus.addAll(workflow.getLinkedStatusObjects())
 }
 
-// Making diff list
+// Create a list of inactive statuses by finding the difference
 Collection<Status> inactiveStatus = allStatuses - activeStatus
 
-// Iterate over each status
+// Iterate over each inactive status and remove it
 inactiveStatus.each { Status status ->
 	statusManager.removeStatus(status.id)
 	report += "${status.getName()}<br/>"
 	i++
 }
 
+// Return the total count of removed statuses and the report
 return "Total: ${i}<br/>" + report
