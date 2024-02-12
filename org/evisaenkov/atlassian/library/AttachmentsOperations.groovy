@@ -6,20 +6,16 @@
 
 package org.evisaenkov.atlassian.library
 
-import com.atlassian.jira.issue.Issue
-import com.atlassian.jira.issue.IssueFieldConstants
-import com.atlassian.jira.issue.attachment.Attachment
-import com.atlassian.jira.issue.attachment.TemporaryAttachmentId
-import com.atlassian.jira.issue.attachment.TemporaryWebAttachment
-import com.atlassian.jira.issue.attachment.TemporaryWebAttachmentManager
-import webwork.action.ActionContext
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.config.util.JiraHome
 import com.atlassian.jira.issue.AttachmentManager
+import com.atlassian.jira.issue.Issue
+import com.atlassian.jira.issue.IssueFieldConstants
 import com.atlassian.jira.issue.MutableIssue
-import com.atlassian.jira.issue.attachment.CreateAttachmentParamsBean
+import com.atlassian.jira.issue.attachment.*
 import com.atlassian.jira.user.ApplicationUser
-import org.evisaenkov.atlassian.library.UserOperations
+import webwork.action.ActionContext
+
 import java.text.SimpleDateFormat
 
 /**
