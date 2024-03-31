@@ -7,6 +7,7 @@
 package org.evisaenkov.atlassian.library
 
 import com.atlassian.jira.bc.security.login.LoginInfo
+import com.atlassian.jira.bc.user.ApplicationUserBuilderImpl
 import com.atlassian.jira.bc.user.search.UserSearchParams
 import com.atlassian.jira.bc.user.search.UserSearchService
 import com.atlassian.jira.component.ComponentAccessor
@@ -114,5 +115,15 @@ class UserOperations {
 		} else if (user instanceof String) {
 			loginManager.resetFailedLoginCount(getUser(user))
 		}
+	}
+	
+	void updateUserEmail(ApplicationUser user, String newEmail) {
+		ApplicationUser newMailUser = new ApplicationUserBuilderImpl(user).emailAddress(newEmail.toLowerCase()).build()
+		userManager.updateUser(newMailUser)
+	}
+
+	void updateUserDisplayName(ApplicationUser user, String newName) {
+		ApplicationUser newMailUser = new ApplicationUserBuilderImpl(user).displayName(newName).build()
+		userManager.updateUser(newMailUser)
 	}
 }
