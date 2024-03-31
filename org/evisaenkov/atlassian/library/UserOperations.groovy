@@ -118,12 +118,22 @@ class UserOperations {
 	}
 	
 	void updateUserEmail(ApplicationUser user, String newEmail) {
-		ApplicationUser newMailUser = new ApplicationUserBuilderImpl(user).emailAddress(newEmail.toLowerCase()).build()
-		userManager.updateUser(newMailUser)
+		ApplicationUser updatedUser = new ApplicationUserBuilderImpl(user).emailAddress(newEmail.toLowerCase()).build()
+		userManager.updateUser(updatedUser)
 	}
-
+	
 	void updateUserDisplayName(ApplicationUser user, String newName) {
-		ApplicationUser newMailUser = new ApplicationUserBuilderImpl(user).displayName(newName).build()
-		userManager.updateUser(newMailUser)
+		ApplicationUser updatedUser = new ApplicationUserBuilderImpl(user).displayName(newName).build()
+		userManager.updateUser(updatedUser)
+	}
+	
+	void updateUserIsActive(ApplicationUser user, boolean active) {
+		ApplicationUser updatedUser = new ApplicationUserBuilderImpl(user).active(active).build()
+		userManager.updateUser(updatedUser)
+	}
+	
+	void updateUserUsername(ApplicationUser user, String username) {
+		ApplicationUser updatedUser = new ApplicationUserBuilderImpl(user).name(username).build()
+		userManager.updateUser(updatedUser)
 	}
 }
