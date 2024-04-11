@@ -8,6 +8,7 @@ package org.evisaenkov.atlassian.library
 
 import com.atlassian.jira.bc.security.login.LoginInfo
 import com.atlassian.jira.bc.user.ApplicationUserBuilderImpl
+import com.atlassian.jira.bc.user.UserService
 import com.atlassian.jira.bc.user.search.UserSearchParams
 import com.atlassian.jira.bc.user.search.UserSearchService
 import com.atlassian.jira.component.ComponentAccessor
@@ -15,7 +16,6 @@ import com.atlassian.jira.security.login.LoginManager
 import com.atlassian.jira.user.ApplicationUser
 import com.atlassian.jira.user.UserFilter
 import com.atlassian.jira.user.util.UserManager
-import org.evisaenkov.atlassian.library.Variables
 
 /**
  * Class for making most commonly user operations Jira requests
@@ -26,6 +26,7 @@ class UserOperations {
 	
 	UserManager userManager = ComponentAccessor.getUserManager()
 	UserSearchService userSearchService = ComponentAccessor.getComponent(UserSearchService.class)
+	UserService userService = ComponentAccessor.getComponent(UserService);
 	
 	ApplicationUser getUser(String username) {
 		if (username && username.contains('JIRA')) {
@@ -135,5 +136,9 @@ class UserOperations {
 	void updateUserUsername(ApplicationUser user, String username) {
 		ApplicationUser updatedUser = new ApplicationUserBuilderImpl(user).name(username).build()
 		userManager.updateUser(updatedUser)
+	}
+	
+	void createUser(ApplicationUser creator, String username, String password = null, String emailAddress, String displayName, boolean notification = false) {
+		UserService.CreateUserRequest createUserRequest = UserService.CreateUserRequest.withUserDetails(creator, username, password, emailAddress, displayName).sendNotification(notification)
 	}
 }
