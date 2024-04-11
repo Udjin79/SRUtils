@@ -138,7 +138,10 @@ class UserOperations {
 		userManager.updateUser(updatedUser)
 	}
 	
-	void createUser(ApplicationUser creator, String username, String password = null, String emailAddress, String displayName, boolean notification = false) {
+	ApplicationUser createUser(ApplicationUser creator, String username, String password, String emailAddress, String displayName, boolean notification = false) {
 		UserService.CreateUserRequest createUserRequest = UserService.CreateUserRequest.withUserDetails(creator, username, password, emailAddress, displayName).sendNotification(notification)
+		UserService.CreateUserValidationResult result = userService.validateCreateUser(createUserRequest);
+		ApplicationUser newUser = userService.createUser(result);
+		return newUser
 	}
 }
