@@ -15,6 +15,7 @@ import com.atlassian.jira.bc.project.component.ProjectComponent
 import com.atlassian.jira.bc.project.component.ProjectComponentManager
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.config.ConstantsManager
+import com.atlassian.jira.config.IssueTypeManager
 import com.atlassian.jira.event.type.EventDispatchOption
 import com.atlassian.jira.issue.CustomFieldManager
 import com.atlassian.jira.issue.Issue
@@ -23,6 +24,7 @@ import com.atlassian.jira.issue.MutableIssue
 import com.atlassian.jira.issue.fields.CustomField
 import com.atlassian.jira.issue.index.IssueIndexingService
 import com.atlassian.jira.issue.issuetype.IssueType
+import com.atlassian.jira.issue.label.Label
 import com.atlassian.jira.issue.search.SearchResults
 import com.atlassian.jira.jql.parser.JqlQueryParser
 import com.atlassian.jira.project.Project
@@ -30,10 +32,9 @@ import com.atlassian.jira.project.ProjectManager
 import com.atlassian.jira.user.ApplicationUser
 import com.atlassian.jira.web.bean.PagerFilter
 import com.atlassian.query.Query
+import com.atlassian.sal.api.net.Request.MethodType
 import groovy.json.JsonSlurper
 import org.evisaenkov.atlassian.library.UserOperations
-import com.atlassian.sal.api.net.Request.MethodType
-import com.atlassian.jira.issue.label.Label
 
 import java.sql.Timestamp
 
@@ -53,6 +54,7 @@ class IssueOperations {
 	JqlQueryParser jqlQueryParser = ComponentAccessor.getComponent(JqlQueryParser) as JqlQueryParser
 	SearchService searchService = ComponentAccessor.getComponent(SearchService)
 	ApplicationUser techUser = userOperations.getTechUser()
+	IssueTypeManager issueTypeManager = ComponentAccessor.getComponent(IssueTypeManager.class)
 	
 	String makeIssue(Map issueBody, Map cfBody = [:]) {
 		/**
@@ -159,6 +161,27 @@ class IssueOperations {
 	Collection<IssueType> getAllIssueTypes() {
 		Collection<IssueType> allIssueTypes = ComponentAccessor.constantsManager.allIssueTypeObjects
 		return allIssueTypes
+	}
+	
+	IssueType getIssueTypeById(String issueTypeId) {
+		IssueType issueType = (IssueType) issueTypeManager.getIssueTypes().find {
+			it.getId() == issueTypeId
+		}
+		return issueType
+	}
+	
+	IssueType getIssueTypeByName(String issueTypeName) {
+		IssueType issueType = (IssueType) issueTypeManager.getIssueTypes().find {
+			it.getName().equalsIgnoreCase(issueTypeName)
+		}
+		return issueType
+	}
+	
+	MutableIssue getIssueEpic(MutableIssue issue) {
+		if (issue.issueType.name != "Epic" && issue.getCustomFieldValue(customFieldManager.getCustomFieldObjectsByName('Epic Link').first())) {
+			return issue.getCustomFieldValue(customFieldManager.getCustomFieldObjectsByName('Epic Link').first()) as MutableIssue
+		}
+		return null
 	}
 	
 	MutableIssue getParentIssue(Issue subTask) {
