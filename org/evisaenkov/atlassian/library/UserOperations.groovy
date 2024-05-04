@@ -16,6 +16,7 @@ import com.atlassian.jira.security.login.LoginManager
 import com.atlassian.jira.user.ApplicationUser
 import com.atlassian.jira.user.UserFilter
 import com.atlassian.jira.user.util.UserManager
+import com.opensymphony.module.propertyset.PropertySet
 
 /**
  * Class for making most commonly user operations Jira requests
@@ -26,7 +27,7 @@ class UserOperations {
 	
 	UserManager userManager = ComponentAccessor.getUserManager()
 	UserSearchService userSearchService = ComponentAccessor.getComponent(UserSearchService.class)
-	UserService userService = ComponentAccessor.getComponent(UserService);
+	UserService userService = ComponentAccessor.getComponent(UserService)
 	
 	ApplicationUser getUser(String username) {
 		if (username && username.contains('JIRA')) {
@@ -143,5 +144,15 @@ class UserOperations {
 		UserService.CreateUserValidationResult result = userService.validateCreateUser(createUserRequest);
 		ApplicationUser newUser = userService.createUser(result);
 		return newUser
+	}
+	
+	String getUserProperties(ApplicationUser user, String key) {
+		String userPropValue = ComponentAccessor.userPropertyManager.getPropertySet(user).getString(key)
+		return userPropValue
+	}
+	
+	PropertySet getAllUserProperties(ApplicationUser user) {
+		PropertySet userPropValue = ComponentAccessor.userPropertyManager.getPropertySet(user)
+		return userPropValue
 	}
 }

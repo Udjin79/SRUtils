@@ -14,53 +14,60 @@ import com.atlassian.jira.issue.Issue
 import com.atlassian.jira.user.ApplicationUser
 import com.onresolve.scriptrunner.runner.customisers.JiraAgileBean
 import com.onresolve.scriptrunner.runner.customisers.WithPlugin
+import org.evisaenkov.atlassian.library.UserOperations
 
 /**
  * Class for sprints operations with SR Jira
  * @author Evgeniy Isaenkov
  */
 class SprintsOperations {
-
+    
     UserOperations userOperations = new UserOperations()
     ApplicationUser techUser = userOperations.getTechUser() as ApplicationUser
-
+    
     @WithPlugin('com.pyxis.greenhopper.jira')
     @JiraAgileBean
     SprintIssueService sprintIssueService
     @JiraAgileBean
     SprintManager sprintManager
-
+    
     Sprint getSprint(Long id) {
         return sprintManager.getSprint(id).getValue()
     }
-
+    
     void deleteSprint(Long id) {
         sprintManager.deleteSprint(getSprint(id))
     }
-
-    List<Sprint> getSprintsForView(RapidView board) {
+    
+    Collection<Sprint> getSprintsForView(RapidView board) {
         return sprintManager.getSprintsForView(board).getValue()
     }
-
+    
+    Collection<Sprint> getActiveSprintsForView(RapidView board) {
+        Collection<Sprint> allSprints = getSprintsForView(board)
+        Collection<Sprint> activeSprints = allSprints?.findAll { Sprint sprint -> sprint.active }
+        return activeSprints ? activeSprints : null
+    }
+    
     List<Sprint> getSprintsForIssue(Issue issue) {
         return sprintIssueService.getSprintsForIssue(techUser, issue).getValue() as List<Sprint>
     }
-
+    
     Sprint getActiveSprintForIssue(Issue issue) {
         def activeSprint = sprintIssueService.getActiveSprintForIssue(techUser, issue)
         return activeSprint ? activeSprint.getValue().first() : null
     }
-
+    
     def moveIssuesToSprint(Issue issue, Sprint sprint) {
         sprintIssueService.moveIssuesToSprint(techUser, sprint, [issue] as Collection)
     }
-
+    
     def removeAllIssuesFromSprint(Sprint sprint) {
         sprintIssueService.removeAllIssuesFromSprint(techUser, sprint)
     }
-
+    
     def moveIssuesToBacklog(Collection<Issue> issueList) {
         sprintIssueService.moveIssuesToBacklog(techUser, issueList)
     }
-
+    
 }
