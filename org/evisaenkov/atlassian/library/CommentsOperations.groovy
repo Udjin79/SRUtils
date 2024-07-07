@@ -44,6 +44,10 @@ class CommentsOperations {
 		commentManager.deleteCommentsForIssue(issue)
 	}
 	
+	void deleteComment(Comment comment) {
+		commentManager.delete(comment, false, techUser)
+	}
+	
 	Collection<String> getAllCommentsBody(MutableIssue issue) {
 		return commentManager.getComments(issue)*.getBody()
 	}
@@ -51,5 +55,4 @@ class CommentsOperations {
 	List<Comment> getAllComments(MutableIssue issue) {
 		return commentManager.getComments(issue)
 	}
-	
 }
